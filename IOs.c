@@ -4,10 +4,12 @@
  *
  * Created on October 27, 2021, 3:12 PM
  */
+#include <xc.h>
+#include <p24F16KA101.h>
+#include "IOs.h"
 extern int CNFlag;
 extern int TMR2Flag;
 extern void Delay_ms(unsigned int);
-extern void Idle();
 
 void IOinit() {
     TRISBbits.TRISB8 = 0; //SET GPIO RB8 as a digital output.
@@ -22,7 +24,7 @@ void IOinit() {
 	
     AD1PCFG = 0xFFFF; // Turn all analog pins as digital
 	
-    IPC4bits.CNIP = 7; //sets priority for Input Change Notification
+    IPC4bits.CNIP = 4; //sets priority for Input Change Notification
 	IFS1bits.CNIF = 0; //Clear the CNI flag
     IEC1bits.CNIE = 1; //Input Change Notification Interrupts Enabled
     CNEN1bits.CN1IE = 1; //Enable input change Notif on RB4
@@ -30,6 +32,7 @@ void IOinit() {
     CNEN2bits.CN30IE = 1; //Enable input change Notif on RA2
     LATBbits.LATB8 = 0; //Turn off LED on start up.
 }
+
 void LED_Cycle(unsigned int time_ms) {
     LATBbits.LATB8 = 1;
     Delay_ms(time_ms);

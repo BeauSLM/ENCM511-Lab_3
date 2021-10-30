@@ -20,6 +20,8 @@
       <itemPath>IOs.c</itemPath>
       <itemPath>IOs.h</itemPath>
       <itemPath>config.h</itemPath>
+      <itemPath>../../../MPLABXProjects/Drivers_Project3.X/TimeDelay.c</itemPath>
+      <itemPath>../../../MPLABXProjects/Drivers_Project3.X/TimeDelay.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -29,6 +31,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>
+    <Elem>../../../MPLABXProjects/Drivers_Project3.X</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

@@ -8,7 +8,6 @@
 // MPLAB header libraries
 #include <xc.h>
 
-#include <p24fxxxx.h>
 #include <p24F16KA101.h>
 #include <stdio.h>
 #include <math.h>
@@ -24,32 +23,28 @@
 
 //Preprocessor directives - Configuration bits for MCU start up
 //test this side
-#pragma config FCKSM = CSECMD // Clock switching is enabled, clock monitor disabled
 int CNFlag = 0;
 int TMR2Flag = 0;
 
 //MAIN
-void main(void) {
-    /*Testing code begins*/
+int main(void) {
+/*
+    //Testing code begins
     //Clock output on REFO/RB15 - Testing purposes only
     TRISBbits.TRISB15 = 0; // Set RB15 as output for REFO
     REFOCONbits.ROEN = 1; //Ref oscillator is enabled
     REFOCONbits.ROSSLP = 0; //Ref oscillator is disabled in sleep mode
     REFOCONbits.ROSEL = 0; //Output base clk showing clock switch
     REFOCONbits.RODIV = 0b0000;
-    /*end of test code*/
+    //end of test code
     // Change Clock
      NewClk(32); // 8 for 8 MHz; 500 for 500 kHz; 32 for 32 kHz
-     
+*/
    // Initialize IOs for low-power wake-up
-    AD1PCFG = 0xFFFF; // Turn all analog pins as digital
-    
     IOinit();
     while(1) {
-        IOcheck();
+        Idle();
     }
     return 0;
     
-    
-    return;
 }

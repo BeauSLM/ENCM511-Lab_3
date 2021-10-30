@@ -36,8 +36,8 @@ extern "C" {
 #pragma config OSCIOFNC = OFF   // CLKO Enable Configuration bit (CLKO output signal is active on the OSCO pin)
 #pragma config POSCFREQ = HS    // Primary Oscillator Frequency Range Configuration bits (Primary oscillator/external clock input frequency greater than 8 MHz)
 #pragma config SOSCSEL = SOSCHP // SOSC Power Selection Configuration bits (Secondary oscillator configured for high-power operation)
-#pragma config FCKSM = CSDCMD   // Clock Switching and Monitor Selection (Both Clock Switching and Fail-safe Clock Monitor are disabled)
-
+//#pragma config FCKSM = CSDCMD   // Clock Switching and Monitor Selection (Both Clock Switching and Fail-safe Clock Monitor are disabled)
+#pragma config FCKSM = CSECMD // Clock switching is enabled, clock monitor disabled
 // FWDT
 #pragma config WDTPS = PS32768 // Watchdog Timer Postscale Select bits (1:32,768)
 #pragma config FWPSA = PR128   // WDT Prescaler (WDT prescaler ratio of 1:128)
@@ -60,13 +60,13 @@ extern "C" {
 #pragma config RTCOSC = SOSC      // RTCC Reference Clock Select bit (RTCC uses SOSC as reference clock)
 #pragma config DSBOREN = ON       // Deep Sleep Zero-Power BOR Enable bit (Deep Sleep BOR enabled in Deep Sleep)
 #pragma config DSWDTEN = ON       // Deep Sleep Watchdog Timer Enable bit (DSWDT enabled)
-
+/*
 // MACROS for Idle, Sleep modes
 #define Nop() {__asm__ volatile ("nop");}
 #define ClrWdt() {__asm__ volatile ("clrwdt");}
 #define Sleep() {__asm__ volatile ("pwrsav #0");}   //Sleep() - put MCU in sleep mode - CPU and some peripherals off
 #define Idle() {__asm__ volatile ("pwrsav #1");}    //Idle() - put MCU in idle mode - only CPU off
 #define dsen() {__asm__ volatile ("BSET DSCON, #15");} //
-
+ */
 #endif	/* CONFIG_H */
 

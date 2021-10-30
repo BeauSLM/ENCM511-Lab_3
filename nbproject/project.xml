@@ -14,6 +14,7 @@
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>.</sourceRootElem>
+                <sourceRootElem>../../../MPLABXProjects/Drivers_Project3.X</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
