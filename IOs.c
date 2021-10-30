@@ -7,6 +7,7 @@
 #include <xc.h>
 #include <p24F16KA101.h>
 #include "IOs.h"
+
 extern int CNFlag;
 extern int TMR2Flag;
 extern void Delay_ms(unsigned int);
@@ -39,12 +40,12 @@ void LED_Cycle(unsigned int time_ms) {
     LATBbits.LATB8 = 0;
     Delay_ms(time_ms);
 }
+
 void IOcheck() {
     if(CNFlag == 1 || TMR2Flag == 1) {
         if(PORTAbits.RA2 == 1 && PORTAbits.RA4 == 1 && PORTBbits.RB4 == 1) {
             CNFlag = 0; // Set our CN Global Flag to False after we handle the interrupt
             LATBbits.LATB8 = 0; //turn LED off in case no button is pressed
-            Idle();
         } else if((PORTAbits.RA2 == 0 && PORTAbits.RA4 == 1 && PORTBbits.RB4 == 1)) {
             //Just button on RA2 GPIO is pressed - shorted
             CNFlag = 0; // Set our CN Global Flag to False after we handle the interrupt
@@ -60,7 +61,6 @@ void IOcheck() {
         } else {
             CNFlag = 0; // Set our CN Global Flag to False after we handle the interrupt
             LATBbits.LATB8 = 1; //turn LED on if multiple buttons are pressed
-            Idle();
         }
     }
 }
