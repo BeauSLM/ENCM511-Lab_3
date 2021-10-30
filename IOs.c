@@ -40,25 +40,33 @@ void LED_Cycle(unsigned int time_ms) {
     LATBbits.LATB8 = 0;
     Delay_ms(time_ms);
 }
-
+//PB1 = RA2
+//PB2 = RA4
+//PB3 = RB4
 void IOcheck() {
     if(CNFlag == 1 || TMR2Flag == 1) {
         if(PORTAbits.RA2 == 1 && PORTAbits.RA4 == 1 && PORTBbits.RB4 == 1) {
             CNFlag = 0; // Set our CN Global Flag to False after we handle the interrupt
             LATBbits.LATB8 = 0; //turn LED off in case no button is pressed
-        } else if((PORTAbits.RA2 == 0 && PORTAbits.RA4 == 1 && PORTBbits.RB4 == 1)) {
-            //Just button on RA2 GPIO is pressed - shorted
+        } 
+        //If PB1 is pressed
+        else if((PORTAbits.RA2 == 0 && PORTAbits.RA4 == 1 && PORTBbits.RB4 == 1)) {
             CNFlag = 0; // Set our CN Global Flag to False after we handle the interrupt
-            LED_Cycle(1000);
-        } else if((PORTAbits.RA2 == 1 && PORTAbits.RA4 == 0 && PORTBbits.RB4 == 1)) {
+            LED_Cycle(500);
+        }
+        //If PB2 is pressed
+        else if((PORTAbits.RA2 == 1 && PORTAbits.RA4 == 0 && PORTBbits.RB4 == 1)) {
             CNFlag = 0; // Set our CN Global Flag to False after we handle the interrupt
             LED_Cycle(2000);
             //Just button on RA4 GPIO is pressed - shorted
-        } else if((PORTAbits.RA2 == 1 && PORTAbits.RA4 == 1 && PORTBbits.RB4 == 0)) {
+        }
+        //if PB3 is pressed
+        else if((PORTAbits.RA2 == 1 && PORTAbits.RA4 == 1 && PORTBbits.RB4 == 0)) {
             CNFlag = 0; // Set our CN Global Flag to False after we handle the interrupt
             LED_Cycle(3000);
             //Just button on RB4 GPIO is pressed - shorted
-        } else {
+        } 
+        else {
             CNFlag = 0; // Set our CN Global Flag to False after we handle the interrupt
             LATBbits.LATB8 = 1; //turn LED on if multiple buttons are pressed
         }

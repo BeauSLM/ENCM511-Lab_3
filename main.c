@@ -20,16 +20,23 @@
 #include "ChangeClk.h"
 #include "UART2.h"
 
+const int CLOCK_SPEED = 32;
+//8 for 8MHz; 
+//500 for 500kHz; 
+//32 for 32kHz;
 
-//Preprocessor directives - Configuration bits for MCU start up
-//test this side
+//global variable flags
 int CNFlag = 0;
 int TMR2Flag = 0;
+
+int PB0Pressed = 0;
+int PB1Pressed = 0;
+int PB2Pressed = 0;
 
 //MAIN
 int main(void) {
 /*
-    //Testing code begins
+    //Testing code begins idk what this does
     //Clock output on REFO/RB15 - Testing purposes only
     TRISBbits.TRISB15 = 0; // Set RB15 as output for REFO
     REFOCONbits.ROEN = 1; //Ref oscillator is enabled
@@ -37,11 +44,9 @@ int main(void) {
     REFOCONbits.ROSEL = 0; //Output base clk showing clock switch
     REFOCONbits.RODIV = 0b0000;
     //end of test code
-    // Change Clock
-     NewClk(32); // 8 for 8 MHz; 500 for 500 kHz; 32 for 32 kHz
-*/
-   // Initialize IOs for low-power wake-up
-    IOinit();
+ */
+    NewClk(CLOCK_SPEED); // Initializes clock based on CLOCK_SPEED
+    IOinit(); // Initialize IOs and IO Change Interrupt
     while(1) {
         Idle();
     }

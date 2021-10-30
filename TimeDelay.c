@@ -6,6 +6,8 @@
  */
 #include <p24F16KA101.h>
 #include <xc.h>
+
+extern const int CLOCK_SPEED;
 extern void IOcheck();
 extern int TMR2Flag;
 extern int CNFlag;
@@ -26,8 +28,20 @@ void Delay_ms(unsigned int time_ms) {
     IEC0bits.T2IE = 1; //Timer 2 interrupt enabled
     IFS0bits.T2IF = 0; //Clear Timer 2 Flag
     IPC1bits.T2IP = 3; //Set Priority level = 3
+    
+    if (CLOCK_SPEED == 8) //8MHz
+    {
+        PR2 = time_ms * 125 / 16; //Number of clock cycles that need to elapse, simplified from formula
+    }
+    else if (CLOCK_SPEED == 500) // 500 kHz
+    {
+        PR2 = time_ms * 125 / 128; //Number of clock cycles that need to elapse
+    }
+    else if (CLOCK_SPEED == 32) //32 kHz
+    {
+        PR2 = time_ms / 16; //Number of clock cycles that need to elapse
+    }
 
-    PR2 = ((time_ms / 1000) * 15625)/2; //Number of clock cycles that need to elapse
     T2CONbits.TON = 1; //Timer 2 Starts here
 
     Idle();
